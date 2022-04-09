@@ -1,18 +1,1 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="300.000000pt" height="300.000000pt" viewBox="0 0 300.000000 300.000000"
- preserveAspectRatio="xMidYMid meet">
-<metadata>
-Created by potrace 1.14, written by Peter Selinger 2001-2017
-</metadata>
-<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
-<path d="M0 1500 l0 -1500 1500 0 1500 0 0 1500 0 1500 -1500 0 -1500 0 0
--1500z m990 855 c53 -121 158 -363 234 -537 l139 -318 142 0 142 0 234 538
-235 537 168 3 c145 2 167 0 164 -13 -2 -8 -109 -258 -238 -555 l-235 -540
--152 0 -153 0 0 -535 0 -535 -165 0 -165 0 0 535 0 535 -152 0 -153 0 -234
-538 c-129 295 -236 545 -239 555 -4 16 7 17 164 15 l168 -3 96 -220z"/>
-</g>
-</svg>
+<?xml version="1.0" ?><svg data-name="Layer 1" id="Layer_1" viewBox="0 0 272 272" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:#ffeb3c;}</style></defs><title/><ellipse class="cls-1" cx="136" cy="136.89" rx="78.81" ry="79.36"/><polygon class="cls-1" points="136 8 118.89 37.84 153.11 37.84 136 8"/><polygon class="cls-1" points="264 136.88 234.37 154.11 234.37 119.66 264 136.88"/><polygon class="cls-1" points="8 136.88 37.63 154.11 37.63 119.66 8 136.88"/><polygon class="cls-1" points="45.49 45.75 54.34 79.03 78.54 54.67 45.49 45.75"/><polygon class="cls-1" points="226.51 45.75 193.46 54.67 217.66 79.03 226.51 45.75"/><polygon class="cls-1" points="136 264 118.89 234.16 153.11 234.16 136 264"/><polygon class="cls-1" points="45.49 226.25 54.34 192.97 78.54 217.33 45.49 226.25"/><polygon class="cls-1" points="226.51 226.25 193.46 217.33 217.66 192.97 226.51 226.25"/></svg>
