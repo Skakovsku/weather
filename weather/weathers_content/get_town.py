@@ -1,7 +1,11 @@
+import os
 from dadata import Dadata
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def get_town(ip_user):
-    token = "c50fb477485fea3f972c5a6a860f91793d13b045"
+    token = os.getenv('token_town')
     dadata = Dadata(token)
     result = dadata.iplocate(ip_user)
     if result is None:

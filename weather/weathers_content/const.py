@@ -1,5 +1,11 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+TOKEN_WEATHER = os.getenv('token_weather')
 API_WEATHER_1 = 'https://api.openweathermap.org/data/2.5/weather?q='
-API_WEATHER_2 = '&units=metric&lang=ru&appid=092e16bc85bd3596b7c24349e1623625'
+API_WEATHER_2 = '&units=metric&lang=ru&appid=' + TOKEN_WEATHER
 
 TEXT_TOWN_1 = 'Ваше местоположение определено автоматически. '
 TEXT_TOWN_2 = 'Если населенный пункт определён неверно, кликните '
