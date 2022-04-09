@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}{{ text_index }}{% endblock %}
+{% block content %}
+  <div class="card">
+    <div class="card-header">
+      <h3>Ваш населённый пункт - {{ town }}</h3>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ text_town }}</p>
+      <a href="{% url "weather:add_town" text='main' %}" class="btn btn-primary">Настроить местоположение</a>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Погода в городе {{ town }} в текущий момент</h5>
+          <div class="row">
+            <div class="col-2"><img src="{{ sign }}" class="card-img-top"></div>
+            <div class="col-10"> {{ description }}</div>
+          </div>
+          <div class="row">
+            <div class="col-8">Температура воздуха:</div>
+            <div align="right" class="col-4">{{ temp }}&deg</div>
+            <div class="col-8">Ощущается как:</div>
+            <div align="right" class="col-4">{{ feels_like }}&deg</div>
+            <div class="col-8">Влажность воздуха:</div>
+            <div align="right" class="col-4">{{ data.main.humidity }}%</div>
+            <div class="col-8">Атмосферное давление:</div>
+            <div align="right" class="col-4">{{ data.main.pressure }} Гпа</div>
+            <div class="col-8">Видимость:</div>
+            <div align="right" class="col-4">{{ data.visibility }} м</div>
+            <div class="col-8">Скорость ветра:</div>
+            <div align="right" class="col-4">{{ wind.speed }} м/с</div>
+            {% if wind.gust %}
+            <div class="col-8">Порывы до</div>
+            <div align="right" class="col-4">{{ wind.gust }} м/с</div>
+            {% endif %}
+            <div class="col-5">Направление:</div>
+            <div align="right" class="col-7">{{ wind.deg }}</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Новый контент</h5>
+          <p class="card-text">Контент ещё не подвезли</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Случайный анекдот</h5><div id='allanecdots'></div>
+          <a href="https://allanecdots.ru/" target="_blank">Свежие анекдоты</a>          
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

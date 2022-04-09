@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+{% if text_town %}
+  <div class="row">
+    <div class="col">
+      <p>К сожалению, такого города нет в базе. Укажите близлежащий населенный пункт</p>
+    </div>
+  </div>
+{% endif %}
+  <form method="post" action="" class="row g-3">
+    {% csrf_token %}
+    <div class="col-auto">
+      <label class="sr-only">Введите название населённого пункта</label>
+      <input type="text" class="form-control" name="town" placeholder="Населённый пункт">
+    </div>
+    <div class="col-auto">
+      <input type="submit" class="btn btn-primary mb-3" value="Сохранить">
+    </div>
+  </form>
+{% endblock %}

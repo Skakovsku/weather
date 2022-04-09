@@ -1,0 +1,40 @@
+﻿{% load static %}
+{% with request.resolver_match.view_name as address %}
+<nav class="navbar navbar-light" style="background-color: lightskyblue">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'weather:index' %}">
+      <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+      <span style="color:red">Зэ</span>ВэZэ
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item"> 
+       <p>First</p>
+      </li>
+      <li class="nav-item">
+        <p>Next</p>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item"> 
+        <p>Next</p>
+      </li>
+      <li class="nav-item"> 
+        <p>Next</p>
+      </li>
+      <li class="nav-item"> 
+        <p>Next</p>
+      </li>
+      <li>
+        Пользователь: {{ user.username }}
+      <li>
+      {% else %}
+      <li class="nav-item"> 
+        <p>Next</p>
+      </li>
+      <li class="nav-item"> 
+        <p>Last</p>
+      </li>
+      {% endif %}
+      {% endwith %}
+    </ul>
+  </div>
+</nav>      
