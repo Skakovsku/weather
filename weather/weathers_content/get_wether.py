@@ -28,24 +28,15 @@ def get_weather(request, town):
     if data['cod'] == '404':
         return {'cod': 'error'}
     weathers_param = get_weathers_data(data)
-    print(weathers_param)
+    if 'Направление:' in weathers_param:
+        deg_wing = weathers_param['Направление:']
+        for deg in const.WIND_DEG:
+            if const.WIND_DEG[deg][0] <= deg_wing < const.WIND_DEG[deg][1]:
+                weathers_param['Направление:'] = deg
+                break
     sign = const.SIGN_BEGIN + data['weather'][0]['icon'] + const.SIGN_END
-    print('sign=', sign)
     description = data['weather'][0]['description']
     name = data['name']
-    print(name)
-    """description = data['weather'][0]['description']
-    temp = int(data['main']['temp'])
-    feels_like = int(data['main']['feels_like'])
-    wind_speed = int(data['wind']['speed'])
-    for deg in const.WIND_DEG.items():
-        if deg[1][0] <= (int(data['wind']['deg'])+22) <= deg[1][1]:
-            wind_deg = deg[0]
-            break
-    wind_gust = None
-    if 'gust' in data['wind']:
-        wind_gust = int(data['wind']['gust'])
-    wind = {'speed': wind_speed, 'gust': wind_gust, 'deg': wind_deg}"""
     context = {
         'text_index': 'Погода в Вашем городе',
         'text_town': text_town,

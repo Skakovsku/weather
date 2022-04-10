@@ -23,24 +23,15 @@
             <div class="col-10"> {{ description }}</div>
           </div>
           <div class="row">
-            <div class="col-8">Температура воздуха:</div>
-            <div align="right" class="col-4">{{ temp }}&deg</div>
-            <div class="col-8">Ощущается как:</div>
-            <div align="right" class="col-4">{{ feels_like }}&deg</div>
-            <div class="col-8">Влажность воздуха:</div>
-            <div align="right" class="col-4">{{ data.main.humidity }}%</div>
-            <div class="col-8">Атмосферное давление:</div>
-            <div align="right" class="col-4">{{ data.main.pressure }} Гпа</div>
-            <div class="col-8">Видимость:</div>
-            <div align="right" class="col-4">{{ data.visibility }} м</div>
-            <div class="col-8">Скорость ветра:</div>
-            <div align="right" class="col-4">{{ wind.speed }} м/с</div>
-            {% if wind.gust %}
-            <div class="col-8">Порывы до</div>
-            <div align="right" class="col-4">{{ wind.gust }} м/с</div>
-            {% endif %}
-            <div class="col-5">Направление:</div>
-            <div align="right" class="col-7">{{ wind.deg }}</div>
+            {% for iter, val in weather.items %}
+              {% if iter == 'Направление:' %}
+                <div class="col-5">{{ iter }}</div>
+                <div align="right" class="col-7">{{ val }}</div>
+              {% else %}
+                <div class="col-9">{{ iter }}</div>
+                <div align="right" class="col-3">{{ val }}</div>
+              {% endif %}
+            {% endfor %}
           </div>
         </div>
         <div class="card-footer">
