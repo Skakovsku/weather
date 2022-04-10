@@ -30,6 +30,6 @@ def add_town(request, text):
 def town(request, town):
     template = 'weathers_content/index.html'
     context = get_wether.get_weather('town', town)
-    if context['data']['cod'] == '404':
+    if context == {'cod': 'error'}:
         return redirect('weather:add_town', text='auxiliary')
     return render(request, template, context)

@@ -31,19 +31,12 @@ WIND_DEG = {
 }
 
 WEATHER_DATA = {
-    'feels_like': 3.71,
-    'grnd_level': 981,
-    'humidity': 84,
-    'pressure': 1003,
-    'temp': 6.55,
-    'name': 'Ступино',
-    'sys': {'country': 'RU', 'sunrise': 1649471994, 'sunset': 1649521103},
-    'timezone': 10800,
-    'visibility': 10000,
-    'description': 'облачно с прояснениями',
-    'icon': '04d',
-    'main': 'Clouds',
-    'deg': 222,
-    'gust': 6.89,
-    'speed': 4.1
+    'feels_like': 'Ощущается как:',
+    'humidity': 'Влажность воздуха:',
+    'pressure': 'Атмосферное давление:',
+    'temp': 'Температура воздуха:',
+    'visibility': 'Видимость:',
+    'deg': 'Направление:',
+    'gust': 'Порывы до',
+    'speed': 'Скорость ветра:'
 }
