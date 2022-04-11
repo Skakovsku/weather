@@ -23,12 +23,12 @@
             <div class="col-10"> {{ description }}</div>
           </div>
           <div class="row">
-            {% for iter, val in weather.items %}
-              {% if iter == 'Направление:' %}
-                <div class="col-5">{{ iter }}</div>
+            {% for key, val in weather.items %}
+              {% if key == 'Направление:' %}
+                <div class="col-5">{{ key }}</div>
                 <div align="right" class="col-7">{{ val }}</div>
               {% else %}
-                <div class="col-9">{{ iter }}</div>
+                <div class="col-9">{{ key }}</div>
                 <div align="right" class="col-3">{{ val }}</div>
               {% endif %}
             {% endfor %}
@@ -41,10 +41,15 @@
     </div>
     <div class="col">
       <div class="card h-100">
-        <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Новый контент</h5>
-          <p class="card-text">Контент ещё не подвезли</p>
+          <h5 class="card-title">Прогноз на 5 суток</h5>
+          <div class="row">
+            {% for date in forecast %}
+              {% for key in date %}
+                <div class="col-12">{{ key }}</div>
+              {% endfor %}
+            {% endfor %}
+          </div>
         </div>
         <div class="card-footer">
           <small class="text-muted">Last updated 3 mins ago</small>
