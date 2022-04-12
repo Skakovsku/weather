@@ -31,11 +31,12 @@
                 <div class="col-9">{{ key }}</div>
                 <div align="right" class="col-3">{{ val }}</div>
               {% endif %}
+              {% if not forloop.last %}<hr>{% endif %}
             {% endfor %}
           </div>
         </div>
         <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
+          <small class="text-muted">О{{ time_update }}</small>
         </div>
       </div>
     </div>
@@ -44,15 +45,18 @@
         <div class="card-body">
           <h5 class="card-title">Прогноз на 5 суток</h5>
           <div class="row">
-            {% for date in forecast %}
-              {% for key in date %}
-                <div class="col-12">{{ key }}</div>
-              {% endfor %}
+            {% for date, value in forecast.items %}
+              <div class="col-12">{{ date }}</div>
+              <div class="col-2"><img src="{{ value.sign }}" class="card-img-top"></div>
+              <div class="col-10"> {{ value.description }}</div>
+              <div class="col-9">Температура воздуха:</div>
+              <div align="right" class="col-3">{{ value.temp }} °C</div>
+              {% if not forloop.last %}<hr>{% endif %}
             {% endfor %}
           </div>
         </div>
         <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
+          <small class="text-muted">{{ time_update }}</small>
         </div>
       </div>
     </div>
@@ -63,7 +67,9 @@
           <a href="https://allanecdots.ru/" target="_blank">Свежие анекдоты</a>          
         </div>
         <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
+          <small class="text-muted">
+            <a href="https://allanecdots.ru/" target="_blank">На сайт с анектотами</a>
+          </small>
         </div>
       </div>
     </div>

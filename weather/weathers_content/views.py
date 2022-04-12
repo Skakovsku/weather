@@ -22,6 +22,7 @@ def add_town(request, text):
     template = 'weathers_content/town.html'
     form = TownForm()
     context = {
+        'text_index': const.TEXT_INDEX,
         'form': form,
         'text_town': text_town,
     }
