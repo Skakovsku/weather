@@ -1,3 +1,4 @@
+from pprint import pprint
 import time
 import requests
 from . import const
@@ -12,7 +13,11 @@ def get_weathers_data(data):
             get_weathers_data(data[elem][0])
         elif elem in const.WEATHER_DATA:
             if type(data[elem]) == float:
-                weathers_data[const.WEATHER_DATA[elem]] = int(data[elem])
+                if data[elem] > 0 and elem == 'temp':
+                    val = '+' + str(int(data[elem]))
+                else:
+                    val = int(data[elem])
+                weathers_data[const.WEATHER_DATA[elem]] = val
             else:
                 weathers_data[const.WEATHER_DATA[elem]] = data[elem]
     return weathers_data
@@ -34,6 +39,19 @@ def get_forecast_5_days(lat, lon):
             forecast[time_for['dt_txt']] = forecast_param
         forecast_param = {}
     return forecast
+
+
+def get_forecast_day(lat, lon, day):
+    coord = str(lat) + '&lon=' + str(lon)
+    response = requests.get(const.API_FOR_1 + coord + const.API_FOR_2)
+    data_request = response.json()
+    data = {}
+    context = []
+    for for_date in data_request['list']:
+        if day in for_date['dt_txt']:
+            data[for_date['dt_txt']] = for_date
+    for time_forecast, param in data.items():
+        print(time_forecast, param)
 
 
 def get_weather(request, town):
@@ -61,6 +79,8 @@ def get_weather(request, town):
     forecast = get_forecast_5_days(lat, lon)
     context = {
         'text_index': const.TEXT_INDEX,
+        'lat': lat,
+        'lon': lon,
         'text_town': text_town,
         'sign': sign,
         'description': description,

@@ -1,3 +1,4 @@
+import time
 from django.shortcuts import render, redirect
 
 from . import const, get_ip, get_town, get_wether
@@ -33,4 +34,16 @@ def town(request, town):
     context = get_wether.get_weather('town', town)
     if context == {'cod': 'error'}:
         return redirect('weather:add_town', text='auxiliary')
+    return render(request, template, context)
+
+def for_day(request, town, day, lat, lon):
+    template = 'weathers_content/forecast.html'
+    day_for_struct = time.strptime(day, "%Y-%m-%d %H:%M:%S")
+    day_for = time.strftime('%Y-%m-%d', day_for_struct)
+    data_day_for = get_wether.get_forecast_day(lat, lon, day_for)
+    context = {
+        'town': town,
+        'day': day_for,
+        'list_a': data_day_for
+    }
     return render(request, template, context)

@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load thumbnail %}
 
 {% block title %}{{ text_index }}{% endblock %}
 {% block content %}
@@ -46,7 +45,8 @@
           <h5 class="card-title">Прогноз на 5 суток</h5>
           <div class="row">
             {% for date, value in forecast.items %}
-              <div class="col-12">{{ date }}</div>
+              <a href="{% url "weather:for_day" name date lat lon %}">
+                <div class="col-12"><strong><em>{{ date }}</em></strong></div></a>
               <div class="col-2"><img src="{{ value.sign }}" class="card-img-top"></div>
               <div class="col-10"> {{ value.description }}</div>
               <div class="col-9">Температура воздуха:</div>
