@@ -40,10 +40,14 @@ def for_day(request, town, day, lat, lon):
     template = 'weathers_content/forecast.html'
     day_for_struct = time.strptime(day, "%Y-%m-%d %H:%M:%S")
     day_for = time.strftime('%Y-%m-%d', day_for_struct)
-    data_day_for = get_wether.get_forecast_day(lat, lon, day_for)
+    data_day_for, time_day, weather, data_day = get_wether.get_forecast_day(
+        lat, lon, day_for)
     context = {
         'town': town,
         'day': day_for,
-        'list_a': data_day_for
+        'for_data': data_day_for,
+        'time_day': time_day,
+        'weather': weather,
+        'data_day': data_day
     }
     return render(request, template, context)

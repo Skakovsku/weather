@@ -1,4 +1,3 @@
-from pprint import pprint
 import time
 import requests
 from . import const
@@ -13,7 +12,7 @@ def get_weathers_data(data):
             get_weathers_data(data[elem][0])
         elif elem in const.WEATHER_DATA:
             if type(data[elem]) == float:
-                if data[elem] > 0 and elem == 'temp':
+                if data[elem] >= 1 and elem == 'temp' or elem == 'feels_like':
                     val = '+' + str(int(data[elem]))
                 else:
                     val = int(data[elem])
@@ -31,7 +30,10 @@ def get_forecast_5_days(lat, lon):
     forecast_param = {}
     for time_for in data_for['list']:
         if (time_for['dt'] + const.HALF_DAY) % const.DAY == 0:
-            forecast_param['temp'] = int(time_for['main']['temp'])
+            temp = int(time_for['main']['temp'])
+            if temp >= 1:
+                temp = '+' + str(temp)
+            forecast_param['temp'] = temp
             title = time_for['weather'][0]
             forecast_param['description'] = title['description']
             sign = const.SIGN_BEGIN + title['icon'] + const.SIGN_END
@@ -46,12 +48,41 @@ def get_forecast_day(lat, lon, day):
     response = requests.get(const.API_FOR_1 + coord + const.API_FOR_2)
     data_request = response.json()
     data = {}
-    context = []
+    time_day, temperature = ['Местное время'], ['Температура, °C']
+    feels_like, press = ['Ощущается как, °C'], ['Атмосферное давление, Гпа:']
+    humidity, clouds = ['Влажность воздуха, %:'], ['Oблачность, %:']
+    speed, gust = ['Скорость ветра, м/с:'], ['Порывы до, м/с']
+    deg, weather = ['Направление:'], ['Характер погоды:']
     for for_date in data_request['list']:
         if day in for_date['dt_txt']:
             data[for_date['dt_txt']] = for_date
     for time_forecast, param in data.items():
-        print(time_forecast, param)
+        day_for_struct = time.strptime(time_forecast, "%Y-%m-%d %H:%M:%S")
+        time_day.append(time.strftime('%H:%M', day_for_struct))
+        data_day = time.strftime('%d.%m.%Y', day_for_struct)
+        temp = int(param['main']['temp'])
+        if temp >= 1:
+            temp = '+' + str(int(param['main']['temp']))
+        temperature.append(temp)
+        feels = int(param['main']['feels_like'])
+        if feels >= 1:
+            feels = '+' + str(int(param['main']['temp']))
+        feels_like.append(feels)
+        press.append(param['main']['pressure'])
+        humidity.append(param['main']['humidity'])
+        clouds.append(param['clouds']['all'])
+        speed.append(int(param['wind']['speed']))
+        gust.append(int(param['wind']['gust']))
+        deg_param = int(param['wind']['deg'])
+        for win in const.WIND_DEG:
+            if const.WIND_DEG[win][0] <= deg_param < const.WIND_DEG[win][1]:
+                deg.append(win)
+                break
+        sign = const.SIGN_BEGIN + param['weather'][0]['icon'] + const.SIGN_END
+        weather.append(sign)
+    context = [temperature, feels_like, press, humidity, clouds, speed, gust,
+               deg]
+    return context, time_day, weather, data_day
 
 
 def get_weather(request, town):

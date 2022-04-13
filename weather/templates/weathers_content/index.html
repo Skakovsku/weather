@@ -3,7 +3,7 @@
 
 {% block title %}{{ text_index }}{% endblock %}
 {% block content %}
-  <div class="card">
+  <div class="card mb-3" style="background-color: PaleTurquoise">
     <div class="card-header">
       <h3>Ваш населённый пункт - {{ name }}</h3>
     </div>
@@ -14,7 +14,7 @@
   </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col">
-      <div class="card h-100">
+      <div class="card h-100" style="background-color: PaleTurquoise">
         <div class="card-body">
           <h5 class="card-title">Погода в городе {{ name }} в текущий момент</h5>
           <div class="row">
@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="col">
-      <div class="card h-100">
+      <div class="card h-100" style="background-color: PaleTurquoise">
         <div class="card-body">
           <h5 class="card-title">Прогноз на 5 суток</h5>
           <div class="row">
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="col">
-      <div class="card h-100">
+      <div class="card h-100" style="background-color: PaleTurquoise">
         <div class="card-body">
           <h5 class="card-title">Случайный анекдот</h5><div id='allanecdots'></div>
           <a href="https://allanecdots.ru/" target="_blank">Свежие анекдоты</a>          

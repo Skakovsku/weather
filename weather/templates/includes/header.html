@@ -1,6 +1,6 @@
 ﻿{% load static %}
 {% with request.resolver_match.view_name as address %}
-<nav class="navbar navbar-light" style="background-color: lightskyblue">
+<nav class="navbar navbar-light" style="background-color: PaleTurquoise">
   <div class="container">
     <a class="navbar-brand" href="{% url 'weather:index' %}">
       <img src="{% static 'img/sun.gif' %}" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -8,7 +8,7 @@
     </a>
     <ul class="nav nav-pills">
       <li class="nav-item"> 
-       <p>Надпись</p>
+       <p></p>
       </li>
       {% endwith %}
     </ul>

@@ -2,42 +2,47 @@
 {% load static %}
 {% block title %}{{ text_index }}{% endblock %}
 {% block content %}
-<div class="card">
+<div class="card mb-3" style="background-color: PaleTurquoise">
   <div class="card-header">
     <h3>Ваш населённый пункт - {{ town }}</h3>
   </div>
   <div class="card-body">
-    <p class="card-text">{{ text_town }}</p>
-    <a href="{% url "weather:add_town" text='main' %}" class="btn btn-primary">Настроить местоположение</a>
+    <h4>Прогноз на {{ data_day }}</h4>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="{% url "weather:add_town" text='main' %}" class="btn btn-primary">Настроить местоположение</a>
+      <a href="{% url "weather:town" town %}" class="btn btn-primary">Вернуться на главную</a>
+    </div>
   </div>
 </div>
-<table class="table table-sm table-striped table-bordered">
+<table class="table table-sm table-striped table-bordered table-info">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Температура воздуха, °C:</th>
-      <th scope="col">Атмосферное давление, Гпа:</th>
-      <th scope="col">Видимость, м:</th>
+      {% for time in time_day %}
+        <th scope="col">{{ time }}</th>
+      {% endfor %}
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      {% for sign in weather %}
+        {% if forloop.first %}
+          <th>{{ sign }}</th>
+        {% else %}
+          <td><img src="{{ sign }}" width="35" height="35"></td>
+        {% endif %}
+      {% endfor %}
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    {% for data in for_data %}
+      <tr>
+        {% for string in data %}
+          {% if forloop.first %}
+            <th>{{ string }}</th>
+          {% else %}
+            <td>{{ string }}</td>
+          {% endif %}
+        {% endfor %}
+      </tr>
+    {% endfor %}
   </tbody>
 </table>
 {% endblock %}
