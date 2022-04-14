@@ -55,13 +55,18 @@ def get_forecast_day(lat, lon, day):
     humidity, clouds = ['Влажность воздуха, %:'], ['Oблачность, %:']
     speed, gust = ['Скорость ветра, м/с:'], ['Порывы до, м/с']
     deg, weather = ['Направление:'], ['Характер погоды:']
+    day_time_struc = time.strptime(day, "%Y-%m-%d")
+    day_time_utc = time.mktime(day_time_struc)
+    day_timezone = day_time_utc - data_request['city']['timezone']
     for for_date in data_request['list']:
-        if day in for_date['dt_txt']:
+        if day_timezone < for_date['dt'] <= (day_timezone + const.DAY):
             data[for_date['dt_txt']] = for_date
     for time_forecast, param in data.items():
-        day_for_struct = time.strptime(time_forecast, "%Y-%m-%d %H:%M:%S")
-        time_day.append(time.strftime('%H:%M', day_for_struct))
-        data_day = time.strftime('%d.%m.%Y', day_for_struct)
+        day_str = time.strptime(time_forecast, "%Y-%m-%d %H:%M:%S")
+        time_day_uts = param['dt'] + data_request['city']['timezone']
+        time_day_str = time.gmtime(time_day_uts)
+        time_day.append(str(time_day_str.tm_hour) + ':00')
+        data_day = time.strftime('%d.%m.%Y', day_str)
         temp = int(param['main']['temp'])
         if temp >= 1:
             temp = '+' + str(int(param['main']['temp']))
