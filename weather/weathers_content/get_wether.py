@@ -12,7 +12,9 @@ def get_weathers_data(data):
             get_weathers_data(data[elem][0])
         elif elem in const.WEATHER_DATA:
             if type(data[elem]) == float:
-                if data[elem] >= 1 and elem == 'temp' or elem == 'feels_like':
+                if data[elem] >= 1 and elem == 'temp':
+                    val = '+' + str(int(data[elem]))
+                elif data[elem] >= 1 and elem == 'feels_like':
                     val = '+' + str(int(data[elem]))
                 else:
                     val = int(data[elem])
@@ -73,11 +75,14 @@ def get_forecast_day(lat, lon, day):
         clouds.append(param['clouds']['all'])
         speed.append(int(param['wind']['speed']))
         gust.append(int(param['wind']['gust']))
-        deg_param = int(param['wind']['deg'])
-        for win in const.WIND_DEG:
-            if const.WIND_DEG[win][0] <= deg_param < const.WIND_DEG[win][1]:
-                deg.append(win)
-                break
+        if 'deg' in param['wind']:
+            deg_param = int(param['wind']['deg'])
+            for win in const.WIND_DEG:
+                if const.WIND_DEG[win][0] <= deg_param <= const.WIND_DEG[win][1]:
+                    deg.append(win)
+                    break
+        else:
+            deg.append('Нет данных')
         sign = const.SIGN_BEGIN + param['weather'][0]['icon'] + const.SIGN_END
         weather.append(sign)
     context = [temperature, feels_like, press, humidity, clouds, speed, gust,
