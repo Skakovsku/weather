@@ -1,3 +1,4 @@
+from pprint import pprint
 import time
 from django.shortcuts import render, redirect
 
@@ -36,18 +37,20 @@ def town(request, town):
         return redirect('weather:add_town', text='auxiliary')
     return render(request, template, context)
 
-def for_day(request, town, day, lat, lon):
+def for_day(request, town, day):
     template = 'weathers_content/forecast.html'
     day_for_struct = time.strptime(day, "%Y-%m-%d %H:%M:%S")
     day_for = time.strftime('%Y-%m-%d', day_for_struct)
-    data_day_for, time_day, weather, data_day = get_wether.get_forecast_day(
-        lat, lon, day_for)
+    other = get_wether.get_forecast_day(
+        town, day_for)
     context = {
         'town': town,
         'day': day_for,
-        'for_data': data_day_for,
-        'time_day': time_day,
-        'weather': weather,
-        'data_day': data_day
+        'for_data': other[0],
+        'time_day': other[1],
+        'weather': other[2],
+        'data_day': other[3],
+        'day_one': other[4]
     }
+    pprint(context)
     return render(request, template, context)

@@ -9,7 +9,7 @@
     </div>
     <div class="card-body">
       <p class="card-text">{{ text_town }}</p>
-      <a href="{% url "weather:add_town" text='main' %}" class="btn btn-primary">Настроить местоположение</a>
+      <a href="{% url "weather:add_town" text='main' %}" class="btn btn-outline-primary">Настроить местоположение</a>
     </div>
   </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -48,7 +48,7 @@
               
               <div class="col-7"><strong><em>{{ date }}</em></strong></div>
               <div class="col-5">
-                <a href="{% url "weather:for_day" name date lat lon %}">
+                <a href="{% url "weather:for_day" name date %}">
                   <em>подробнее</em>
                 </a>
               </div>

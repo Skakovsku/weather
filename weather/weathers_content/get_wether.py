@@ -1,3 +1,4 @@
+from pprint import pprint
 import time
 import requests
 from . import const
@@ -24,7 +25,10 @@ def get_weathers_data(data):
     return weathers_data
 
 
-def get_forecast_5_days(lat, lon):
+def get_forecast_5_days(town):
+    response = requests.get(const.API_WEATHER_1 + town + const.API_WEATHER_2)
+    data = response.json()
+    lat, lon = data['coord']['lat'], data['coord']['lon']
     coord = str(lat) + '&lon=' + str(lon)
     response = requests.get(const.API_FOR_1 + coord + const.API_FOR_2)
     data_for = response.json()
@@ -45,10 +49,21 @@ def get_forecast_5_days(lat, lon):
     return forecast
 
 
-def get_forecast_day(lat, lon, day):
+def get_forecast_day(town, day):
+    response = requests.get(const.API_WEATHER_1 + town + const.API_WEATHER_2)
+    data = response.json()
+    lat, lon = data['coord']['lat'], data['coord']['lon']
     coord = str(lat) + '&lon=' + str(lon)
     response = requests.get(const.API_FOR_1 + coord + const.API_FOR_2)
     data_request = response.json()
+    day_one = {}
+    day_one_for = data_request['list'][0]['dt'] + data['timezone']
+    for period in range(5):
+        day_one_struc = time.gmtime(day_one_for)
+        key = time.strftime("%d.%m.%Y", day_one_struc)
+        value = time.strftime("%Y-%m-%d %H:%M:%S", day_one_struc)
+        day_one[key] = value
+        day_one_for += const.DAY
     data = {}
     time_day, temperature = ['Местное время'], ['Температура, °C']
     feels_like, press = ['Ощущается как, °C'], ['Атмосферное давление, Гпа:']
@@ -66,7 +81,6 @@ def get_forecast_day(lat, lon, day):
         time_day_uts = param['dt'] + data_request['city']['timezone']
         time_day_str = time.gmtime(time_day_uts)
         time_day.append(str(time_day_str.tm_hour) + ':00')
-        data_day = time.strftime('%d.%m.%Y', day_str)
         temp = int(param['main']['temp'])
         if temp >= 1:
             temp = '+' + str(int(param['main']['temp']))
@@ -92,7 +106,8 @@ def get_forecast_day(lat, lon, day):
         weather.append(sign)
     context = [temperature, feels_like, press, humidity, clouds, speed, gust,
                deg]
-    return context, time_day, weather, data_day
+    data_day = time.strftime('%d.%m.%Y', day_str)
+    return [context, time_day, weather, data_day, day_one]
 
 
 def get_weather(request, town):
@@ -104,6 +119,7 @@ def get_weather(request, town):
     if data['cod'] == '404':
         return {'cod': 'error'}
     weathers_param = get_weathers_data(data)
+    pprint(data)
     if 'Направление:' in weathers_param:
         deg_wing = weathers_param['Направление:']
         for deg in const.WIND_DEG:
@@ -116,18 +132,19 @@ def get_weather(request, town):
     sign = const.SIGN_BEGIN + data['weather'][0]['icon'] + const.SIGN_END
     description = data['weather'][0]['description']
     name = data['name']
-    lat, lon = data['coord']['lat'], data['coord']['lon']
-    forecast = get_forecast_5_days(lat, lon)
+    temp = int(data['main']['temp'])
+    if temp >=1:
+        temp = '+' + str(temp)
+    forecast = get_forecast_5_days(name)
     context = {
         'text_index': const.TEXT_INDEX,
-        'lat': lat,
-        'lon': lon,
         'text_town': text_town,
         'sign': sign,
         'description': description,
         'name': name,
         'time_update': date_updated,
         'forecast': forecast,
+        'temp': temp,
         'weather': {}
     }
     for param, val in weathers_param.items():

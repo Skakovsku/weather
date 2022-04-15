@@ -9,11 +9,22 @@
   <div class="card-body">
     <h4>Прогноз на {{ data_day }}</h4>
     <div class="btn-group" role="group" aria-label="Basic example">
-      <a href="{% url "weather:add_town" text='main' %}" class="btn btn-primary">Настроить местоположение</a>
-      <a href="{% url "weather:town" town %}" class="btn btn-primary">Вернуться на главную</a>
+      <a href="{% url "weather:add_town" text='main' %}" class="btn btn-outline-primary">Настроить местоположение</a>
+      <a href="{% url "weather:town" town %}" class="btn btn-outline-primary">Вернуться на главную</a>
     </div>
   </div>
 </div>
+
+<div class="btn-group" role="group" style="width:100%">
+  {% for day, time in day_one.items %}
+    {% if day == data_day %}
+      <a href="{% url "weather:for_day" town time %}" class="btn btn-primary">{{ day }}</a>
+    {% else %}
+      <a href="{% url "weather:for_day" town time %}" class="btn btn-outline-primary">{{ day }}</a>
+    {% endif %}
+  {% endfor %}
+</div>
+
 <table class="table table-sm table-striped table-bordered table-info">
   <thead>
     <tr>
