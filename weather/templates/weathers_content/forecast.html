@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}{{ text_index }}{% endblock %}
 {% block content %}
+
 <div class="card mb-3" style="background-color: PaleTurquoise">
   <div class="card-header">
     <h3>Ваш населённый пункт - {{ town }}</h3>
@@ -15,45 +16,54 @@
   </div>
 </div>
 
-<div class="btn-group" role="group" style="width:100%">
-  {% for day, time in day_one.items %}
-    {% if day == data_day %}
-      <a href="{% url "weather:for_day" town time %}" class="btn btn-primary">{{ day }}</a>
-    {% else %}
-      <a href="{% url "weather:for_day" town time %}" class="btn btn-outline-primary">{{ day }}</a>
-    {% endif %}
-  {% endfor %}
-</div>
-
-<table class="table table-sm table-striped table-bordered table-info">
-  <thead>
-    <tr>
-      {% for time in time_day %}
-        <th scope="col">{{ time }}</th>
-      {% endfor %}
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      {% for sign in weather %}
-        {% if forloop.first %}
-          <th>{{ sign }}</th>
-        {% else %}
-          <td><img src="{{ sign }}" width="35" height="35"></td>
-        {% endif %}
-      {% endfor %}
-    </tr>
-    {% for data in for_data %}
-      <tr>
-        {% for string in data %}
-          {% if forloop.first %}
-            <th>{{ string }}</th>
+<div class="card text-center" style="background-color: lightskyblue">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      {% for day, time in day_one.items %}
+        <li class="nav-item">
+          {% if day == data_day %}
+            <a class="nav-link active" aria-current="true" style="background-color: lightskyblue; border-color:lightskyblue" href="{% url "weather:for_day" town time %}">{{ day }}</a>
           {% else %}
-            <td>{{ string }}</td>
+          <a class="nav-link" href="{% url "weather:for_day" town time %}">{{ day }}</a>
           {% endif %}
-        {% endfor %}
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-sm table-striped table-bordered table-info">
+        <thead>
+          <tr>
+            {% for time in time_day %}
+              <th scope="col">{{ time }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for sign in weather %}
+              {% if forloop.first %}
+                <th>{{ sign }}</th>
+              {% else %}
+                <td><img src="{{ sign }}" width="35" height="35"></td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+          {% for data in for_data %}
+            <tr>
+              {% for string in data %}
+                {% if forloop.first %}
+                  <th>{{ string }}</th>
+                {% else %}
+                  <td>{{ string }}</td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 {% endblock %}

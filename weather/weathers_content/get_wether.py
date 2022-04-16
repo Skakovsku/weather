@@ -1,4 +1,3 @@
-from pprint import pprint
 import time
 import requests
 from . import const
@@ -69,7 +68,7 @@ def get_forecast_day(town, day):
         day_one_for += const.DAY
     data = {}
     time_day, temperature = ['Местное время'], ['Температура, °C']
-    feels_like, press = ['Ощущается как, °C'], ['Атмосферное давление, Гпа:']
+    feels_like, press = ['Ощущается как, °C'], ['Атмосферное давление, гПа:']
     humidity, clouds = ['Влажность воздуха, %:'], ['Oблачность, %:']
     speed, gust = ['Скорость ветра, м/с:'], ['Порывы до, м/с']
     deg, weather = ['Направление:'], ['Характер погоды:']

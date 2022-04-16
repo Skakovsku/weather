@@ -1,4 +1,3 @@
-from pprint import pprint
 import time
 from django.shortcuts import render, redirect
 
