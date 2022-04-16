@@ -13,6 +13,7 @@ def index(request):
     return render(request, template, context)
 
 def add_town(request, text):
+    """Setting up the town name."""
     if text == 'main':
         text_town = None
     elif text == 'auxiliary':
@@ -50,7 +51,7 @@ def for_day(request, town, day):
         'time_day': other[1],
         'weather': other[2],
         'data_day': other[3],
-        'day_one': other[4]
+        'day_one': other[4],
+        'temp': other[5]
     }
-    pprint(context)
     return render(request, template, context)

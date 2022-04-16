@@ -7,8 +7,10 @@
       <span style="color:red">Зэ</span>ВэZэ
     </a>
     <ul class="nav nav-pills">
-      <li class="nav-item"> 
-        <h2><font color="#FF6347" face="serif"><b><i>{{ temp }}°C</i></b></font></h2>
+      <li class="nav-item">
+        {% if temp is not None %}
+          <h2><font color="#FF6347" face="serif"><b><i>Сейчас {{ temp }}°C</i></b></font></h2>
+        {% endif %}
       </li>
       {% endwith %}
     </ul>
