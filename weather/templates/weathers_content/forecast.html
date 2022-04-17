@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<div class="card text-center" style="background-color: lightskyblue">
+<div class="card" style="background-color: lightskyblue">
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       {% for day, time in day_one.items %}
@@ -24,7 +24,7 @@
           {% if day == data_day %}
             <a class="nav-link active" aria-current="true" style="background-color: lightskyblue; border-color:lightskyblue" href="{% url "weather:for_day" town time %}">{{ day }}</a>
           {% else %}
-          <a class="nav-link" href="{% url "weather:for_day" town time %}">{{ day }}</a>
+            <a class="nav-link" href="{% url "weather:for_day" town time %}">{{ day }}</a>
           {% endif %}
         </li>
       {% endfor %}

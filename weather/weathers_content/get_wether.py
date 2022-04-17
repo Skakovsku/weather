@@ -50,22 +50,20 @@ def get_forecast_5_days(town):
 
 def get_forecast_day(town, day):
     response = requests.get(const.API_WEATHER_1 + town + const.API_WEATHER_2)
-    data_curr = response.json() #  Можно убрать, без JSON
+    data_curr = response.json()
     temp_cur = int(data_curr['main']['temp'])
     if temp_cur >=1:
         temp_cur = '+' + str(temp_cur)
     lat, lon = data_curr['coord']['lat'], data_curr['coord']['lon']
     coord = str(lat) + '&lon=' + str(lon)
     response = requests.get(const.API_FOR_1 + coord + const.API_FOR_2)
-    data_request = response.json() #  ? Может тоже можно убрать
+    data_request = response.json()
     day_one = {}
-    day_one_for = data_request['list'][0]['dt'] + data_curr['timezone']
-    for period in range(5):
-        day_one_struc = time.gmtime(day_one_for)
+    for period in data_request['list']:
+        day_one_struc = time.gmtime(period['dt'] + data_curr['timezone'])
         key = time.strftime("%d.%m.%Y", day_one_struc)
         value = time.strftime("%Y-%m-%d %H:%M:%S", day_one_struc)
         day_one[key] = value
-        day_one_for += const.DAY
     data = {}
     time_day, temperature = ['Местное время'], ['Температура, °C']
     feels_like, press = ['Ощущается как, °C'], ['Атмосферное давление, гПа:']
