@@ -1,18 +1,37 @@
 ﻿{% load static %}
 {% with request.resolver_match.view_name as address %}
-<nav class="navbar navbar-light" style="background-color: PaleTurquoise">
-  <div class="container">
-    <a class="navbar-brand" href="{% url 'weather:index' %}">
-      <img src="{% static 'img/sun.gif' %}" width="30" height="30" class="d-inline-block align-top" alt="">
-      <span style="color:red">Зэ</span>ВэZэ
-    </a>
-    <ul class="nav nav-pills">
-      <li class="nav-item">
-        {% if temp is not None %}
-          <h2><font color="#FF6347" face="serif"><b><i>Сейчас {{ temp }}°C</i></b></font></h2>
-        {% endif %}
-      </li>
-      {% endwith %}
-    </ul>
+  <nav class="navbar navbar-light" style="background-color: PaleTurquoise">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'weather:index' %}">
+        <img src="{% static 'img/sun.gif' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span style="color:red">Зэ</span>ВэZэ
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a style="text-decoration:none" href="{% url "about:author" %}">
+            <h2><font color="MediumBlue" face="serif"><b><i>Об авторе</i></b></font></h2>
+          </a>
+        </li>
+      </ul>
+
+      {% if about %}
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a style="text-decoration:none" href="{% url "weather:index" %}">
+              <h2><font color="#FF6347" face="serif"><b><i>На сайт</i></b></font></h2>
+            </a>
+          </li>
+        </ul>
+      {% else %}
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            {% if temp is not None %}
+              <h2><font color="#FF6347" face="serif"><b><i>Сейчас {{ temp }}°C</i></b></font></h2>
+            {% endif %}
+          </li>
+        </ul>
+      {% endif %}
+    {% endwith %}
   </div>
 </nav>      
