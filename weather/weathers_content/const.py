@@ -24,7 +24,7 @@ SPEC_CITY = SPEC_CITY_1 + SPEC_CITY_2
 SIGN_BEGIN = 'http://openweathermap.org/img/wn/'
 SIGN_END = '@2x.png'
 
-WIND_DEG = {
+WIN_DEG = {
     'Сев.': [0, 44],
     'Сев.-Вос.': [45, 90],
     'Вос.': [91, 135],

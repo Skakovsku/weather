@@ -1,10 +1,4 @@
-### Omsk weather by coord
+### Get weather data
 
-GET https://api.openweathermap.org/data/2.5/weather?lat=54.8863&lon=73&appid=<token>&units=metric&lang=ru
-Content-Type: application/json
-
-
-### Stupino weather by town
-
-GET https://api.openweathermap.org/data/2.5/weather?q=Stupino&appid=<token>&units=metric&lang=ru
+GET http://127.0.0.1:8000/api/v1/Omsk/
 Content-Type: application/json

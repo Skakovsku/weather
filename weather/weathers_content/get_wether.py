@@ -4,6 +4,7 @@ from . import const
 
 weathers_data = {}
 
+
 def get_weathers_data(data):
     for elem in data:
         if type(data[elem]) is dict:
@@ -52,7 +53,7 @@ def get_forecast_day(town, day):
     response = requests.get(const.API_WEATHER_1 + town + const.API_WEATHER_2)
     data_curr = response.json()
     temp_cur = int(data_curr['main']['temp'])
-    if temp_cur >=1:
+    if temp_cur >= 1:
         temp_cur = '+' + str(temp_cur)
     lat, lon = data_curr['coord']['lat'], data_curr['coord']['lon']
     coord = str(lat) + '&lon=' + str(lon)
@@ -96,8 +97,8 @@ def get_forecast_day(town, day):
         gust.append(int(param['wind']['gust']))
         if 'deg' in param['wind']:
             deg_param = int(param['wind']['deg'])
-            for win in const.WIND_DEG:
-                if const.WIND_DEG[win][0] <= deg_param <= const.WIND_DEG[win][1]:
+            for win in const.WIN_DEG:
+                if const.WIN_DEG[win][0] <= deg_param <= const.WIN_DEG[win][1]:
                     deg.append(win)
                     break
         else:
@@ -121,8 +122,8 @@ def get_weather(request, town):
     weathers_param = get_weathers_data(data)
     if 'Направление:' in weathers_param:
         deg_wing = weathers_param['Направление:']
-        for deg in const.WIND_DEG:
-            if const.WIND_DEG[deg][0] <= deg_wing < const.WIND_DEG[deg][1]:
+        for deg in const.WIN_DEG:
+            if const.WIN_DEG[deg][0] <= deg_wing < const.WIN_DEG[deg][1]:
                 weathers_param['Направление:'] = deg
                 break
     time_request = data['dt'] + data['timezone']
@@ -132,7 +133,7 @@ def get_weather(request, town):
     description = data['weather'][0]['description']
     name = data['name']
     temp = int(data['main']['temp'])
-    if temp >=1:
+    if temp >= 1:
         temp = '+' + str(temp)
     forecast = get_forecast_5_days(name)
     context = {
