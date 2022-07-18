@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ text_index }}{% endblock %}
+{% block content %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for link_goro in list_link %}
+    <div class="col">
+      <div class="card h-100" style="background-color: PaleTurquoise">
+        <div class="card-body">
+          <div id="{{ link_goro }}"><a href="http://www.ignio.com/">Загрузка гороскопа от Ignio</a></div>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Обновлено: только что</small>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
