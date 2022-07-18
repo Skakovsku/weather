@@ -10,5 +10,6 @@ urlpatterns = [
         views.for_day,
         name='for_day'),
     path('town/<str:town>/', views.town, name='town'),
+    path('goro/', views.goro, name='goro'),
     path('', views.index, name='index')
 ]
