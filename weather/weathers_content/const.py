@@ -50,3 +50,12 @@ WEATHER_DATA = {
 
 HALF_DAY = 43200
 DAY = 86400
+
+LIST_LINK_GORO = [
+    'ignio-daily-ero',
+    'ignio-daily-cook',
+    'ignio-daily-lov',
+    'ignio-daily-mob',
+    'ignio-daily-anti',
+    'ignio-weekly-lov'
+]
