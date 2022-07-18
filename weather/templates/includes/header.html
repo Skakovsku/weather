@@ -1,4 +1,4 @@
-﻿{% load static %}
+{% load static %}
 {% with request.resolver_match.view_name as address %}
   <nav class="navbar navbar-light" style="background-color: PaleTurquoise">
     <div class="container">
@@ -15,7 +15,7 @@
         </li>
       </ul>
 
-      {% if about %}
+      {% if about or goro %}
         <ul class="nav nav-pills">
           <li class="nav-item">
             <a style="text-decoration:none" href="{% url "weather:index" %}">
@@ -34,4 +34,4 @@
       {% endif %}
     {% endwith %}
   </div>
-</nav>      
+</nav>
