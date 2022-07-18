@@ -45,7 +45,7 @@
           <h5 class="card-title">Прогноз на 5 суток</h5>
           <div class="row">
             {% for date, value in forecast.items %}
-              
+
               <div class="col-7"><strong><em>{{ date }}</em></strong></div>
               <div class="col-5">
                 <a href="{% url "weather:for_day" name date %}">
@@ -68,13 +68,18 @@
     <div class="col">
       <div class="card h-100" style="background-color: PaleTurquoise">
         <div class="card-body">
-          <h5 class="card-title">Случайный анекдот</h5><div id='allanecdots'></div>
-          <a href="https://allanecdots.ru/" target="_blank">Свежие анекдоты</a>          
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" style="background-color: PaleTurquoise">
+              <h2 class="card-title">Случайный анекдот</h2><div id='allanecdots'></div>
+              <a href="https://allanecdots.ru/" target="_blank">Свежие анекдоты</a>
+            </li>
+            <li class="list-group-item" style="background-color: PaleTurquoise">
+              <div id="ignio-daily-anti"><a href="http://www.ignio.com/" target="_blank">Загрузка гороскопа от Ignio</a></div>
+            </li>
+          </ul>
         </div>
         <div class="card-footer">
-          <small class="text-muted">
-            <a href="https://allanecdots.ru/" target="_blank">На сайт с анектотами</a>
-          </small>
+          <a href="{% url "weather:goro" %}">Тематические гороскопы</a>
         </div>
       </div>
     </div>
