@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 {% load static %}
 <html lang="ru">
   <head>
@@ -8,24 +8,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/popper.min.js' %}">
-    <link rel="shortcut icon" href="{% static 'img/fav/fav.ico' %}" 
+    <link rel="shortcut icon" href="{% static 'img/fav/fav.ico' %}"
       type="image">
-    <link rel="apple-touch-icon" sizes="180x180" 
+    <link rel="apple-touch-icon" sizes="180x180"
       href="{% static 'img/fav/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" 
+    <link rel="icon" type="image/png" sizes="32x32"
       href="{% static 'img/fav/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" 
+    <link rel="icon" type="image/png" sizes="16x16"
       href="{% static 'img/fav/favicon-16x16.png' %}">
     <meta name="msapplication-TileColor" content="#000">
     <meta name="theme-color" content="#ffffff">
     <title>
       {% block title %}
-        Заголовок пока не подвезли :(
+        ЗэВэЗэ
       {% endblock %}
     </title>
+    <style type="text/css">
+      .ignioInformerSelectSign { /* Выбор знака Зодиака */
+        font-size: 16px; /* Размер шрифта */
+        color: black; /* Цвет шрифта */
+        margin: 0 5px 0 0; /* Отступ между знаком Зодиака и датой */
+        background: #40E0D0; /* Цвет фона */
+      }
+        .ignioInformerSelectDate {
+        font-size: 16px; /* Размер шрифта */
+        color: black; /* Цвет шрифта */
+        margin: 0 0 0 5px; /* Отступ между знаком Зодиака и датой */
+        background: #40E0D0; /* Цвет фона */
+      }
+    </style>
   </head>
 
-  <body style="background-color: lightskyblue"> 
+  <body style="background-color: lightskyblue">
     <header>
       {% include "includes/header.html" %}
     </header>
@@ -39,8 +53,15 @@
     </main>
 
     <footer>
-      {% include "includes/footer.html" %} 
+      {% include "includes/footer.html" %}
     </footer>
     <script type="text/javascript" src="https://allanecdots.ru/vidgets/allanecdots.js?n=2&nocensored=1"></script>
+    <script type="text/javascript" charset="utf-8" src="//ignio.com/r/export/utf/tinyjs/daily/anti.js"></script>
+    <script type="text/javascript" charset="utf-8" src="//ignio.com/r/export/utf/tinyjs/daily/com.js"></script>
+    <script type="text/javascript" charset="utf-8" src="//ignio.com/r/export/utf/tinyjs/daily/ero.js"></script>
+    <script type="text/javascript" charset="utf-8" src="//ignio.com/r/export/utf/tinyjs/daily/cook.js"></script>
+    <script type="text/javascript" charset="utf-8" src="//ignio.com/r/export/utf/tinyjs/daily/lov.js"></script>
+    <script type="text/javascript" charset="utf-8" src="//ignio.com/r/export/utf/tinyjs/daily/mob.js"></script>
+    <script type="text/javascript" charset="utf-8" src="//ignio.com/r/export/utf/tinyjs/weekly/lov.js"></script>
   </body>
 </html>
