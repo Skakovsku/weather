@@ -5,5 +5,8 @@ class AboutAuthorView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context = {'about': True}
+        context = {
+            'about': True,
+            'name': kwargs['town'],
+        }
         return context

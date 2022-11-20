@@ -9,7 +9,7 @@
     </div>
     <div class="card-body">
       <p class="card-text">{{ text_town }}</p>
-      <a href="{% url "weather:add_town" text='main' %}" class="btn btn-outline-primary">Настроить местоположение</a>
+      <a href="{% url 'weather:add_town' text='main' town_current='name' %}" class="btn btn-outline-primary">Настроить местоположение</a>
     </div>
   </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -79,7 +79,7 @@
           </ul>
         </div>
         <div class="card-footer">
-          <a href="{% url "weather:goro" %}">Тематические гороскопы</a>
+          <a href="{% url "weather:goro" name %}">Тематические гороскопы</a>
         </div>
       </div>
     </div>

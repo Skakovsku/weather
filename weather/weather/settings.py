@@ -59,6 +59,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'weathers_content.context_processors.year.year',
+                'weathers_content.context_processors.year.years_old',
             ],
         },
     },

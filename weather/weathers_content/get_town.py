@@ -9,6 +9,6 @@ def get_town(ip_user):
     dadata = Dadata(token)
     result = dadata.iplocate(ip_user)
     if result is None:
-        return 'Воркута'
+        return 'Москва'
     user_toun = result.get('value').split(' ')[1]
     return user_toun

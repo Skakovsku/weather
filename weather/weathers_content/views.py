@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from . import const, get_ip, get_town, get_wether
 from .get_user_info import get_user_info
 from .forms import TownForm
+from pprint import pprint
 
 def index(request):
     user_ip = get_ip.get_client_ip(request)
@@ -11,9 +12,10 @@ def index(request):
     get_user_info(request, 'index', town)
     template = 'weathers_content/index.html'
     context = get_wether.get_weather('index', town)
+    pprint(context)
     return render(request, template, context)
 
-def add_town(request, text):
+def add_town(request, text, town_current):
     """Setting up the town name."""
     if text == 'main':
         text_town = None
@@ -38,6 +40,7 @@ def add_town(request, text):
         'form': form,
         'text_town': text_town,
         'town_list': town_list,
+        'name': town_current,
     }
     return render(request, template, context)
 
@@ -57,7 +60,7 @@ def for_day(request, town, day):
     other = get_wether.get_forecast_day(
         town, day_for)
     context = {
-        'town': town,
+        'name': town,
         'day': day_for,
         'for_data': other[0],
         'time_day': other[1],
@@ -68,13 +71,14 @@ def for_day(request, town, day):
     }
     return render(request, template, context)
 
-def goro(request):
+def goro(request, town):
     get_user_info(request, 'goro', 'goro')
     template = 'weathers_content/goro.html'
     list_link = const.LIST_LINK_GORO
     context = {
         'list_link': list_link,
         'text_index': 'Гороскоп от ЗэВэЗэ',
-        'goro': True
+        'goro': True,
+        'name': town,
     }
     return render(request, template, context)
