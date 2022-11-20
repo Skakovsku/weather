@@ -72,7 +72,7 @@ def for_day(request, town, day):
     return render(request, template, context)
 
 def goro(request, town):
-    get_user_info(request, 'goro', 'goro')
+    get_user_info(request, 'goro', town)
     template = 'weathers_content/goro.html'
     list_link = const.LIST_LINK_GORO
     context = {
