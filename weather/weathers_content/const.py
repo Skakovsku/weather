@@ -12,7 +12,7 @@ API_FOR_2 = '&units=metric&lang=ru&appid=' + TOKEN_WEATHER
 
 TEXT_TOWN_1 = 'Ваше местоположение определено автоматически. '
 TEXT_TOWN_2 = 'Если населенный пункт определён неверно, кликните '
-TEXT_TOWN_3 = 'кнопку ниже и настройте местоположение в ручную.'
+TEXT_TOWN_3 = 'кнопку ниже и настройте местоположение вручную.'
 TEXT_TOWN = TEXT_TOWN_1 + TEXT_TOWN_2 + TEXT_TOWN_3
 
 TEXT_INDEX = 'Погода в Вашем городе'

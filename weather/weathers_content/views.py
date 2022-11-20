@@ -24,12 +24,20 @@ def add_town(request, text):
         town = form.cleaned_data['town']
         return redirect('weather:town', town)
     get_user_info(request, 'add_town', text)
+    town_list = []
+    file = open('/home/eugenus/dev/weather/weather/weathers_content/db_town.txt', 'r')
+    for town_str in range(1363):
+        town_current = file.readline().strip()
+        if town_current != '':
+            town_list.append(town_current)
+    file.close()
     template = 'weathers_content/town.html'
     form = TownForm()
     context = {
         'text_index': const.TEXT_INDEX,
         'form': form,
         'text_town': text_town,
+        'town_list': town_list,
     }
     return render(request, template, context)
 

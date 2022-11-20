@@ -1,6 +1,74 @@
 {% extends "base.html" %}
 {% block title %}{{ text_index }}{% endblock %}
 {% block content %}
+
+<script type="text/javascript" language="javascript">
+  var autocomplete = {{ town_list|safe }}
+  window.onload = function() {
+    document.getElementById('input').onkeyup = keyUp;
+  }
+
+  function keyUp(e) {
+    var e = e || window.event;
+    switch (e.keyCode) {
+      case 40:
+        var selected = -1;
+        var spans = document.getElementById('autocomplete').getElementsByTagName('span');
+        for (i = 0; i <= spans.length; i++)
+          if (i in spans && spans[i].className == 'selected') {
+            spans[i].className = '';
+            selected = i;
+          }
+        selected++;
+        for (i = 0; i <= spans.length; i++)
+          if (i in spans && i == selected) {
+            spans[i].className = 'selected';
+          }
+        break;
+      case 38:
+        var spans = document.getElementById('autocomplete').getElementsByTagName('span');
+        var selected = spans.length;
+        for (i = 0; i <= spans.length; i++)
+          if (i in spans && spans[i].className == 'selected') {
+            spans[i].className = '';
+            selected = i;
+          }
+        selected--;
+        for (i = 0; i <= spans.length; i++)
+          if (i in spans && i == selected) {
+            spans[i].className = 'selected';
+          }
+        break;
+      case 13:
+        var spans = document.getElementById('autocomplete').getElementsByTagName('span');
+        for (i = 0; i <= spans.length; i++)
+          if (i in spans && spans[i].className == 'selected') {
+            document.getElementById('input').value = spans[i].innerHTML;
+            document.getElementById('autocomplete').innerHTML = '';
+          }
+        break;
+      default:
+        var div = document.getElementById('autocomplete');
+        var value = document.getElementById('input').value;
+        div.innerHTML = '';
+        if (value.length > 0) {
+          autocomplete.forEach(function(elem, index) {
+            var regex = new RegExp("^" + value, "i");
+            //if(elem.includes(value)) {
+            if (elem.match(regex)) {
+              var click_func = "choice_city('" + autocomplete[index] + "')"; 
+              div.innerHTML += '<span onclick="' + click_func + '">' + autocomplete[index] + '</span><br />';
+            }
+          });
+        }
+    }
+  }
+  var choice_city = function(city_name){
+     document.getElementById('input').value = city_name;
+     document.getElementById('autocomplete').innerHTML = '';
+  };
+</script>
+
 {% if text_town %}
   <div class="row">
     <div class="col">
@@ -12,10 +80,12 @@
     {% csrf_token %}
     <div class="col-auto">
       <label class="sr-only">Введите название населённого пункта</label>
-      <input type="text" class="form-control bg-info" name="town" placeholder="Населённый пункт">
+      <input type="text" class="form-control bg-info" name="town" placeholder="Населённый пункт" id="input">
+      <div id="autocomplete"></div>
     </div>
     <div class="col-auto">
       <input type="submit" class="btn btn-outline-primary mb-3" value="Сохранить">
     </div>
   </form>
+
 {% endblock %}
