@@ -11,9 +11,3 @@ COPY weather/ /app
 WORKDIR /app
 
 CMD ["gunicorn", "weather.wsgi:application", "--bind", "0:8000" ]
-
-# RUN python3 manage.py collectstatic --no-input
-
-RUN python3 manage.py makemigrations
-
-RUN python3 manage.py migrate
