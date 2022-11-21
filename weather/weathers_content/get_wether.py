@@ -123,7 +123,7 @@ def get_weather(request, town):
     if 'Направление:' in weathers_param:
         deg_wing = weathers_param['Направление:']
         for deg in const.WIN_DEG:
-            if const.WIN_DEG[deg][0] <= deg_wing < const.WIN_DEG[deg][1]:
+            if const.WIN_DEG[deg][0] <= deg_wing <= const.WIN_DEG[deg][1]:
                 weathers_param['Направление:'] = deg
                 break
     time_request = data['dt'] + data['timezone']
