@@ -38,7 +38,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           source: "*"
-          target: "/home/freelance/dev/"
+          target: "/root/dev/"
 
       - uses: appleboy/ssh-action@master
         with:
@@ -49,3 +49,6 @@ jobs:
           script: |
             cd ~/dev/
             sudo docker-compose up -d --build
+            sudo docker-compose exec -T web python manage.py makemigrations
+            sudo docker-compose exec -T web python manage.py migrate
+            sudo docker-compose exec -T web python manage.py collectstatic --no-input

@@ -27,7 +27,7 @@ def add_town(request, text, town_current):
         return redirect('weather:town', town)
     get_user_info(request, 'add_town', text)
     town_list = []
-    file = open('/home/eugenus/dev/weather/weather/weathers_content/db_town.txt', 'r')
+    file = open('weathers_content/db_town.txt', 'r')
     for town_str in range(1363):
         town_current = file.readline().strip()
         if town_current != '':
