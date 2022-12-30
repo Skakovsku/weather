@@ -12,7 +12,6 @@ def index(request):
     get_user_info(request, 'index', town)
     template = 'weathers_content/index.html'
     context = get_wether.get_weather('index', town)
-    pprint(context)
     return render(request, template, context)
 
 def add_town(request, text, town_current):
