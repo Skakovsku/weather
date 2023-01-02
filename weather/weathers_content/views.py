@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from . import const, get_ip, get_town, get_wether
 from .get_user_info import get_user_info
 from .forms import TownForm
-from pprint import pprint
+
 
 def index(request):
     user_ip = get_ip.get_client_ip(request)
