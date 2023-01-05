@@ -8,7 +8,8 @@ from .forms import TownForm
 
 def index(request):
     user_ip = get_ip.get_client_ip(request)
-    town = get_town.get_town(user_ip)
+    #town = get_town.get_town(user_ip)
+    town = 'Москва'
     get_user_info(request, 'index', town)
     template = 'weathers_content/index.html'
     context = get_wether.get_weather('index', town)
