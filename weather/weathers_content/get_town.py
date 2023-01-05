@@ -10,5 +10,7 @@ def get_town(ip_user):
     result = dadata.iplocate(ip_user)
     if result is None:
         return 'Москва'
-    user_toun = result.get('value').split(' ')[1]
-    return user_toun
+    user_town = result['data']['city']
+    if user_town is None:
+        return 'Москва'
+    return user_town
