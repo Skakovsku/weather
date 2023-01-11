@@ -1,6 +1,9 @@
 import time
+
 from user_agents import parse
+
 from .get_ip import get_client_ip
+
 
 def get_user_info(request, view, town):
 	ua_string = request.META['HTTP_USER_AGENT']

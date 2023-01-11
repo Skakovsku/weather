@@ -1,9 +1,10 @@
 import time
-from django.shortcuts import render, redirect
+
+from django.shortcuts import redirect, render
 
 from . import const, get_ip, get_town, get_wether
-from .get_user_info import get_user_info
 from .forms import TownForm
+from .get_user_info import get_user_info
 
 
 def index(request):

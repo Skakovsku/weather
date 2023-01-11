@@ -1,9 +1,10 @@
 from django.core.mail import send_mail
+from django.shortcuts import redirect, render
 from django.views.generic.base import TemplateView
-from django.shortcuts import render, redirect
-
 from weathers_content.get_user_info import get_user_info
+
 from .forms import EmailForm
+
 
 class AboutAuthorView(TemplateView):
     template_name = 'about/author.html'
