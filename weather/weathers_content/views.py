@@ -54,11 +54,13 @@ def town(request, town):
 def for_day(request, town, day):
     get_user_info(request, 'for_day', town)
     template = 'weathers_content/forecast.html'
+    text_index = 'Подробный прогноз ' + town
     day_for_struct = time.strptime(day, "%Y-%m-%d %H:%M:%S")
     day_for = time.strftime('%Y-%m-%d', day_for_struct)
     other = get_wether.get_forecast_day(
         town, day_for)
     context = {
+        'text_index': text_index,
         'name': town,
         'day': day_for,
         'for_data': other[0],
