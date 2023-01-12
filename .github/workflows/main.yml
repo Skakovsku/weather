@@ -28,7 +28,6 @@ jobs:
             if [ -e "dev" ]
             then
             sudo rm -r dev; mkdir dev; cd dev/
-            sudo docker-compose down -v
             else
             mkdir dev; cd dev/
             fi
