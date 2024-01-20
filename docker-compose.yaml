@@ -13,12 +13,12 @@ services:
 
     ports:
       - "80:80"
-      - "443:443"
+      # - "443:443"
 
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/zeveze.ru.crt:/etc/nginx/ssl/zeveze.ru.crt
-      - ./nginx/zeveze.ru.key:/etc/nginx/ssl/zeveze.ru.key
+      # - ./nginx/zeveze.ru.crt:/etc/nginx/ssl/zeveze.ru.crt
+      # - ./nginx/zeveze.ru.key:/etc/nginx/ssl/zeveze.ru.key
       - static_value:/var/html/static/
       - media_value:/var/html/media/
 
