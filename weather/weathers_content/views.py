@@ -7,6 +7,12 @@ from .forms import TownForm
 from .get_user_info import get_user_info
 
 
+def change_cert(request):
+    template = 'rhhk8QYgMTzkxBThHLnrf_KGvj1O2_f7VZ0dWEp8V2g.html'
+    context = {}
+    return render(request, template, context)
+
+
 def index(request):
     user_ip = get_ip.get_client_ip(request)
     town = get_town.get_town(user_ip)
