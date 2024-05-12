@@ -7,12 +7,6 @@ from .forms import TownForm
 from .get_user_info import get_user_info
 
 
-def cert(request):
-    template = 'KtVZ8CVDOM8OxBC2kPOg-raizbLmV-H0C05cmR6zYhg.html'
-    context = {}
-    return render(request, template, context)
-
-
 def index(request):
     user_ip = get_ip.get_client_ip(request)
     town = get_town.get_town(user_ip)
@@ -51,6 +45,7 @@ def add_town(request, text, town_current):
     }
     return render(request, template, context)
 
+
 def town(request, town):
     get_user_info(request, 'town', town)
     template = 'weathers_content/index.html'
@@ -58,6 +53,7 @@ def town(request, town):
     if context == {'cod': 'error'}:
         return redirect('weather:add_town', text='auxiliary')
     return render(request, template, context)
+
 
 def for_day(request, town, day):
     get_user_info(request, 'for_day', town)
@@ -79,6 +75,7 @@ def for_day(request, town, day):
         'temp': other[5]
     }
     return render(request, template, context)
+
 
 def goro(request, town):
     get_user_info(request, 'goro', town)

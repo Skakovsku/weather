@@ -6,10 +6,6 @@ app_name = 'weather'
 
 urlpatterns = [
     path(
-        '.well-known/acme-challenge/KtVZ8CVDOM8OxBC2kPOg-raizbLmV-H0C05cmR6zYhg/',
-        views.cert,
-        name='cert'),
-    path(
         'add-town/<str:text>/<str:town_current>/',
         views.add_town,
         name='add_town'),
