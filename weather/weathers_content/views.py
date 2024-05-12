@@ -7,6 +7,12 @@ from .forms import TownForm
 from .get_user_info import get_user_info
 
 
+def cert(request):
+    template = 'KtVZ8CVDOM8OxBC2kPOg-raizbLmV-H0C05cmR6zYhg.html'
+    context = {}
+    return render(request, template, context)
+
+
 def index(request):
     user_ip = get_ip.get_client_ip(request)
     town = get_town.get_town(user_ip)
@@ -14,6 +20,7 @@ def index(request):
     template = 'weathers_content/index.html'
     context = get_wether.get_weather('index', town)
     return render(request, template, context)
+
 
 def add_town(request, text, town_current):
     """Setting up the town name."""
